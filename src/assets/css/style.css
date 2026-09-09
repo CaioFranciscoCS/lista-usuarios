@@ -18,6 +18,7 @@ html, body{
     height: 100vh;
     font-family: 'ubuntu';
     background-color:var(--bg);
+    overflow-x: hidden;
 }
 
 #header {
@@ -35,9 +36,26 @@ html, body{
 }
 
 #main {
-    margin: 20px 400px;
+    margin: 20px 280px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
 }
+
+@media (max-width: 768px) {
+  #main {
+    margin: 20px 5%;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .card-table th,
+  .card-table td {
+    font-size: 12px;
+    padding-left: 8px;
+  }
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -53,6 +71,14 @@ html, body{
 .card-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
+    th:nth-child(1) { width: 15%; }  /* Nome */
+    th:nth-child(2) { width: 15%; }  /* Usuários */
+    th:nth-child(3) { width: 20%; }  /* Email */
+    th:nth-child(4) { width: 15%; }  /* Empresa */
+    th:nth-child(5) { width: 5%; }  /* Botão */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 tr:nth-child(even) {

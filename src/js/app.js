@@ -1,12 +1,18 @@
 async function getUsers() {
-    const resp = await fetch("https://jsonplaceholder.typicode.com/users")
-    const users = await resp.json();
-
-    return users;
+    try {
+        const resp = await fetch("https://jsonplaceholder.typicode.com/users")
+        const users = await resp.json();
+        return users;        
+    } catch (error) {
+        alert("Error na API!")
+        console.log(error)
+        return [];
+    }
 } 
 
-async function updateTable () {
+async function updateTable() {
     let tableBody = document.querySelector(".js-user-line")
+    tableBody.innerHTML = 'carregando...'  
     let users = await getUsers()
     let linhas = ""
     for(let user of users) {
@@ -15,14 +21,14 @@ async function updateTable () {
             <td>${user.name}</td>
             <td>${user.username}</td>
             <td>${user.email}</td>
+            <td>${user.company.name}</td>
             <td>
                 <button onclick="userDetail(${user.id})">exibir</button>
             </td>
         </tr>
-        `
-
+         `
+    tableBody.innerHTML = linhas   
     }
-    tableBody.innerHTML = linhas
 }
 
 async function userDetail(userId) {
@@ -42,11 +48,11 @@ async function getTips() {
     setTimeout(()=> {
         document.querySelector(".tips").innerText = tip.slip.advice
         document.querySelector(".tips").style.display = "inline-block"
-    }, 5000)
+    }, 6000)
 }
 setInterval(()=> {
     getTips()
     document.querySelector(".tips").style.display = "none"
-}, 8000)
+}, 14000)
 
 updateTable()
